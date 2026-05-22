@@ -1,17 +1,16 @@
 import express from 'express';
 import pool from './servico/conexao.js';
+import { cadastrarLead } from './servico/cadastro_servico.js';
 
 const app = express();
 
 
-app.listen(9000, async() => {
+app.listen(3001, async() => {
     const data = new Date();
-
-    const conexao = await pool.getConnection();
-
     console.log(`Servidor iniciado em ${data}`)
-    console.log(conexao.threadId)
+   
+    cadastrarLead('fernando', 'fernando@gmail.com')
 
-    conexao.release();
+    
 
 })
