@@ -1,6 +1,6 @@
 import express from 'express';
 import pool from './servico/conexao.js';
-import { cadastrarLead, retornaLead } from './servico/cadastro_servico.js';
+import { cadastrarLead, retornaLead, retornaLeadID } from './servico/cadastro_servico.js';
 
 const app = express();
 app.use(express.json())
@@ -18,6 +18,17 @@ app.get('/usuarios', async(req, res) => {
     const lead = await retornaLead();
 
     res.json(lead);
+})
+app.get('/usuarios/:id', async(req, res) => {
+    const id = req.params.id;
+
+    const leadID = await retornaLeadID(id);
+
+    if(leadID.length > 0){
+        res.json(leadID);
+    }else{
+        res.status(404).json({mensagem: "Nenhum id encontrado !!"})
+    }
 })
 
 
