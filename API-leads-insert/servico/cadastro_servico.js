@@ -9,3 +9,14 @@ export async function cadastrarLead(nome, email) {
 
     conexao.release();
 }
+
+export async function retornaLead(){
+    const conexao = await pool.getConnection();
+
+    const resposta = await conexao.query('SELECT id, nome, email FROM leads');
+
+    conexao.release();
+    return resposta
+
+   
+}
