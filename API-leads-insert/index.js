@@ -1,6 +1,5 @@
 import express from 'express';
-import pool from './servico/conexao.js';
-import { cadastrarLead, retornaLead, retornaLeadID } from './servico/cadastro_servico.js';
+import { cadastrarLead, retornaLead, retornaLeadID } from './servico/servico.js';
 
 const app = express();
 app.use(express.json())
