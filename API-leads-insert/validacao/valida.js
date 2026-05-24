@@ -8,6 +8,23 @@ function validaEmail(email){
     return isValid;
 }
 
+function validaID(id) {
+    const isValid = id.length > 0;
+    return isValid;
+}
+
+export function usuarioID(id){
+    const usuarioid = validaID(id)
+
+    const idValido = usuarioid;
+    
+    if (idValido) {
+        return {status: true, mensagem: ''};
+    }else {
+        return {status: false, mensagem: 'Usuário não encontrado'}
+    }
+}
+
 export function validaUsuario(nome, email) {
     const nomeValido = validaNome(nome);
     const emailValido = validaEmail(email);
