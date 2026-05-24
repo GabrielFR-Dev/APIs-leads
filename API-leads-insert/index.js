@@ -1,6 +1,6 @@
 import express from 'express';
 import { cadastrarLead, retornaLead, retornaLeadID } from './servico/servico.js';
-import { validaUsuario, validaID } from './validacao/valida.js';
+import { validaUsuario } from './validacao/valida.js';
 
 const app = express();
 app.use(express.json())
@@ -28,13 +28,12 @@ app.get('/usuarios', async (req, res) => {
 app.get('/usuarios/:id', async (req, res) => {
     const id = req.params.id;
 
-    const idValido = validaID(id)
+    const leadID = await retornaLeadID(id);
 
-    if (idValido.status) {
-        const leadID = await retornaLeadID(id);
+    if (leadID.length > 0) {
         res.json(leadID);
     } else {
-        res.status(404).send({ mensagem: idValido.mensagem })
+        res.status(404).json({ mensagem: "Nenhum id encontrado !!" })
     }
 })
 
